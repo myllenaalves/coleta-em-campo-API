@@ -1,4 +1,15 @@
 Rails.application.routes.draw do
+  apipie
+  namespace 'api' do
+    namespace 'v1' do
+      resources :user
+      resources :visit
+      resources :formulary
+      resources :question
+      resources :answer
+      post 'authenticate', to: 'authentication#authenticate'
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
