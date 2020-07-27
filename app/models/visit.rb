@@ -1,4 +1,5 @@
 class Visit < ActiveRecord::Base
+  validates :date, :user_id, :status, presence: true
   validate :date_cannot_be_less_than_date_of_creation
   validate :checkin_at_cannot_be_greater_than_or_equal_to_today
   validate :checkin_at_cannot_be_greater_than_or_equal_to_today, :on => :create

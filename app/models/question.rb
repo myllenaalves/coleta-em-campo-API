@@ -1,4 +1,5 @@
 class Question < ActiveRecord::Base
+  validates :name, :formulary_id, :question_type, presence: true
   has_one_attached :image
   has_one :answer
   validates_uniqueness_of :name, scope: :formulary_id
