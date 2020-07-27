@@ -1,13 +1,5 @@
 require 'rails_helper'
 
-FactoryBot.define do
-  factory :user do
-    email { 'columbus_bahringer@robel-bednar.io' }
-    cpf  {'01070681504'}
-    password {'poliglota90'}
-  end
-end
-
 RSpec.describe "Authenticate", type: :request do
   describe "GET /authenticate" do
     it 'when authentication is not valid' do

@@ -4,16 +4,6 @@ require 'faker'
 require 'factory_bot_rails'
 require 'knock'
 
-FactoryBot.define do
-  factory :user do
-    id { 2 }
-    email { 'columbus_bahringer@robel-bednar.io' }
-    cpf  {'01070681504'}
-    password {'poliglota90'}
-    name { "Test user" }
-  end
-end
-
 RSpec.describe User, :type => :model do
   subject {
    described_class.new(email: Faker::Internet.email,

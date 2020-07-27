@@ -1,36 +1,18 @@
 require 'rails_helper'
 require 'factory_bot_rails'
 
-FactoryBot.define do
-  factory :formulary do
-    id { 1 }
-    name { "Test formulary 1" }
-  end
-end
-
-FactoryBot.define do
-  factory :question do
-    name { "Test 1" }
-    formulary_id { 1 }
-    question_type {'hohoihdoihd'}
-  end
-end
-
 RSpec.describe Answer, :type => :model do
-  before(:all) do
-    @formulary = FactoryBot.create(:formulary)
-    @question = FactoryBot.create(:question)
-  end
-
   subject {
    described_class.new(content: 'iehoiehioh',
-                       formulary_id: 1,
-                       question_id: 1,
-                       visit_id: 1
+                       formulary_id: 2,
+                       question_id: 2,
+                       visit_id: 2
                      )
   }
 
   it "is valid with valid attributes" do
+    @formulary = FactoryBot.create(:formulary)
+    @question = FactoryBot.create(:question)
     expect(subject).to be_valid
   end
 

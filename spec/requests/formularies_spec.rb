@@ -1,25 +1,8 @@
 require 'rails_helper'
 
-FactoryBot.define do
-  factory :user do
-    id { 1 }
-    email { 'columbus_bahringer@robel-bednar.io' }
-    cpf  {'01070681504'}
-    password {'poliglota90'}
-    name { "Test user" }
-  end
-end
-
-FactoryBot.define do
-  factory :formulary do
-    id { 2 }
-    name { "Test formulary 1" }
-  end
-end
-
 RSpec.describe "Formularies", type: :request do
   before(:all) do
-    @user = FactoryBot.create(:user)
+    @user = FactoryBot.build(:user)
     @formulary = FactoryBot.create(:formulary)
   end
 

@@ -4,31 +4,18 @@ require 'faker'
 require 'factory_bot_rails'
 require 'knock'
 
-FactoryBot.define do
-  factory :user do
-    id { 2 }
-    email { 'mirtha_reilly@little-kerluke.co' }
-    cpf  {'04985100420'}
-    password {'poliglota90'}
-    name { "Test user" }
-  end
-end
-
 RSpec.describe Visit, :type => :model do
-  before(:all) do
-    @user = FactoryBot.create(:user)
-  end
-
   subject {
    described_class.new(date: "2020-08-26 08:00:00.202929584 -0300",
                        checkin_at: "2020-02-26 12:00:00",
                        checkout_at: "2020-02-26 14:00:00",
-                       user_id: @user.id,
+                       user_id: 2,
                        status: "Realizado"
                       )
   }
 
   it "is valid with valid attributes" do
+    @user = FactoryBot.create(:user)
     expect(subject).to be_valid
   end
 

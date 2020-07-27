@@ -1,35 +1,8 @@
 require 'rails_helper'
 
-FactoryBot.define do
-  factory :user do
-    id { 1 }
-    email { 'columbus_bahringer@robel-bednar.io' }
-    cpf  {'01070681504'}
-    password {'poliglota90'}
-    name { "Test user" }
-  end
-end
-
-FactoryBot.define do
-  factory :question do
-    id { 2 }
-    name {'lkdhkldah'}
-    formulary_id { 1 }
-    question_type {'ifahoifh'}
-  end
-end
-
-FactoryBot.define do
-  factory :formulary do
-    id { 1 }
-    name { "Test formulary 1" }
-  end
-end
-
 RSpec.describe "Questions", type: :request do
   before(:all) do
-    @user = FactoryBot.create(:user)
-    @formulary = FactoryBot.create(:formulary)
+    @user = FactoryBot.build(:user)
     @question = FactoryBot.create(:question)
   end
 
@@ -52,7 +25,7 @@ RSpec.describe "Questions", type: :request do
   describe "questions#post" do
     it 'when the question is created' do
       allow(AuthorizeApiRequest).to receive_message_chain(:call, :result).and_return(@user)
-      post '/api/v1/question', params: {:name => 'Test question 2', formulary_id: 1, question_type: 'fknlkfnklnf'}
+      post '/api/v1/question', params: {:name => 'Test question 2', formulary_id: 2, question_type: 'fknlkfnklnf'}
       expect(response).to have_http_status(201)
     end
 
