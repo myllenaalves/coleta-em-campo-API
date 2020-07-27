@@ -1,15 +1,22 @@
 module Api
   module V1
     class AnswerController < ApplicationController
+      def_param_group :answer do
+        param :content, String, :desc => "Conteúdo da resposta", :required => true
+        param :formulary_id, String, :desc => "ID do formulário que a resposta vai pertencer", :required => true
+        param :question_id, String, :desc => "ID da Pergunta que a resposta vai pertencer ", :required => true
+        param :visit_id, String, :desc => "ID da Visita que a resposta vai pertencer"
+      end
       # Listar todas as respotas
-      api :GET, "/v1/answer", "Lista todas as respostas"
+      api :GET, "/v1/answer", "Lista todas as respostas (Necessário autenticação)"
       def index
         answers = Answer.order('created_at DESC');
         render json: {status: 'SUCCESS', message:'Respostas carregadas', data:answers},status: :ok
       end
 
       #Criar uma nova resposta
-      api :POST, "/v1/answer", "Cria uma resposta"
+      api :POST, "/v1/answer", "Cria uma resposta (Necessário autenticação)"
+      param_group :answer
       def create
 				answer = Answer.new(answer_params)
 				if answer.save
@@ -20,8 +27,8 @@ module Api
 			end
 
       #Editar uma resposta
-      api :PUT, "/v1/answer/:id", "Edita uma resposta"
-      api :PATCH, "/v1/answer/:id", "Edita uma resposta"
+      api :PUT, "/v1/answer/:id", "Edita uma resposta (Necessário autenticação)"
+      api :PATCH, "/v1/answer/:id", "Edita uma resposta (Necessário autenticação)"
       def update
         if Answer.exists?(params[:id])
           answer = Answer.find(params[:id])
@@ -36,7 +43,7 @@ module Api
       end
 
       #Deletar uma resposta
-      api :DELETE, "/v1/answer/:id", "Deleta uma resposta"
+      api :DELETE, "/v1/answer/:id", "Deleta uma resposta (Necessário autenticação)"
       def destroy
         if Answer.exists?(params[:id])
           answer = Answer.find(params[:id])

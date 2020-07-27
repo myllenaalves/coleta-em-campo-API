@@ -5,14 +5,13 @@ module Api
 
       def_param_group :user do
         param :name, String, :desc => "Nome do usuário"
-        param :email, String, :desc => "Email para a autenticação"
-        param :password, String, :desc => "Senha para a autenticação"
+        param :email, String, :desc => "Email para a autenticação", :required => true
+        param :password, String, :desc => "Senha para a autenticação", :required => true
         param :cpf, String, :desc => "CPF do usuário"
       end
 
       # Listar todos os usuários
-      api :GET, "/v1/user", "Lista todos os usuários"
-      param_group :user
+      api :GET, "/v1/user", "Lista todos os usuários (Necessário autenticação)"
       def index
         users = User.order('created_at DESC');
         render json: {status: 'SUCCESS', message:'Usuários carregados', data:users},status: :ok
@@ -20,6 +19,7 @@ module Api
 
       #Criar um novo usuário
       api :POST, "/v1/user", "Cria um usuário"
+      param_group :user
       def create
 				user = User.new(user_params)
 				if user.save
@@ -30,8 +30,8 @@ module Api
 			end
 
       #Editar um usuário
-      api :PUT, "/v1/user/:id", "Edita um usuário"
-      api :PATCH, "/v1/user/:id", "Edita um usuário"
+      api :PUT, "/v1/user/:id", "Edita um usuário (Necessário autenticação)"
+      api :PATCH, "/v1/user/:id", "Edita um usuário (Necessário autenticação)"
       def update
         if User.exists?(params[:id])
           user = User.find(params[:id])
@@ -46,7 +46,7 @@ module Api
       end
 
       # Excluir usuário
-      api :DELETE, "/v1/user/:id", "Deleta um usuário"
+      api :DELETE, "/v1/user/:id", "Deleta um usuário (Necessário autenticação)"
 			def destroy
         if User.exists?(params[:id])
           user = User.find(params[:id])

@@ -1,15 +1,23 @@
 module Api
   module V1
     class VisitController < ApplicationController
+      def_param_group :visit do
+        param :user_id, String, :desc => "Id do usuário que a visita pertence", :required => true
+        param :date, DateTime, :desc => "Email para a autenticação", :required => true
+        param :status, String, :desc => "Pode ser realizando, pendente ou realizada", :required => true
+        param :ckeckin_at, DateTime, :desc => "Horário de chegada da visita"
+        param :ckeckin_out, DateTime, :desc => "Horário de saída da visita"
+      end
       # Listar todas as visitas
-      api :GET, "/v1/visit", "Lista todas as visitas"
+      api :GET, "/v1/visit", "Lista todas as visitas (Necessário autenticação)"
       def index
         visits = Visit.order('created_at DESC');
         render json: {status: 'SUCCESS', message:'Visitas carregadas', data:visits},status: :ok
       end
 
       #Criar uma nova visita
-      api :POST, "/v1/visit", "Cria uma visita"
+      api :POST, "/v1/visit", "Cria uma visita (Necessário autenticação)"
+      param_group :visit
       def create
 				visit = Visit.new(visit_params)
 				if visit.save
@@ -20,8 +28,8 @@ module Api
 			end
 
       #Editar uma visita
-      api :PUT, "/v1/visit/:id", "Edita uma visita"
-      api :PATCH, "/v1/visit/:id", "Edita uma visita"
+      api :PUT, "/v1/visit/:id", "Edita uma visita (Necessário autenticação)"
+      api :PATCH, "/v1/visit/:id", "Edita uma visita (Necessário autenticação)"
       def update
         if Visit.exists?(params[:id])
           visit = Visit.find(params[:id])
@@ -36,7 +44,7 @@ module Api
       end
 
       #Deletar uma visita
-      api :DELETE, "/v1/visit/:id", "Deleta uma visita"
+      api :DELETE, "/v1/visit/:id", "Deleta uma visita (Necessário autenticação)"
       def destroy
         if Visit.exists?(params[:id])
           visit = Visit.find(params[:id])
