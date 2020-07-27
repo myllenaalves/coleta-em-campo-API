@@ -2,8 +2,10 @@
 - API para sistema de coleta em campo
 - Organização e estruturação dos dados coletados.
 - Saída em json para um servidor externo.
-- PostgreSQL, for DB
-- Deploy on Heroku (https://coleta-em-campo-api.herokuapp.com/apipie)
+- PostgreSQL, para o banco de dados
+- Deploy no Heroku
+- Link da API (https://coleta-em-campo-api.herokuapp.com)
+- Link da documentação da API (https://coleta-em-campo-api.herokuapp.com/apipie)
 
 ## Instalação
 
@@ -23,3 +25,8 @@ Obs: É importante verificar a criação das databases locais (database.yml)
 
 - Para executar o servidor:
   - $ bundle exec rails server
+  
+  ## Autenticação
+
+ - Para realizar a autenticação do usuário é necessário inserir o token sobre a chave Authorization no Header de qualquer requisição
+  que precise de autenticação.
