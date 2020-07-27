@@ -3,6 +3,9 @@ module Api
     class AuthenticationController < ApplicationController
       skip_before_action :authenticate_request
 
+      # DOC GENERATED AUTOMATICALLY: REMOVE THIS LINE TO PREVENT REGENERATING NEXT TIME
+      api :POST, '/v1/authenticate', 'Autenticação de usuário'
+      error code: 401
       def authenticate
         command = AuthenticateUser.call(params[:email], params[:password], params[:cpf])
 

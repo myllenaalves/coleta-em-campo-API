@@ -1,0 +1,16 @@
+current directory: /home/myllena/coleta-em-campo-API/vendor/bundle/ruby/2.7.0/gems/binding_of_caller-0.8.0/ext/binding_of_caller
+/home/myllena/.rvm/rubies/ruby-2.7.0/bin/ruby -I /home/myllena/.rvm/rubies/ruby-2.7.0/lib/ruby/2.7.0 -r ./siteconf20200722-12442-1hyq2n0.rb extconf.rb
+
+current directory: /home/myllena/coleta-em-campo-API/vendor/bundle/ruby/2.7.0/gems/binding_of_caller-0.8.0/ext/binding_of_caller
+make "DESTDIR=" clean
+make: *** No rule to make target 'clean'.  Pare.
+
+current directory: /home/myllena/coleta-em-campo-API/vendor/bundle/ruby/2.7.0/gems/binding_of_caller-0.8.0/ext/binding_of_caller
+make "DESTDIR="
+echo "Nada."
+Nada.
+
+current directory: /home/myllena/coleta-em-campo-API/vendor/bundle/ruby/2.7.0/gems/binding_of_caller-0.8.0/ext/binding_of_caller
+make "DESTDIR=" install
+echo "Nada."
+Nada.

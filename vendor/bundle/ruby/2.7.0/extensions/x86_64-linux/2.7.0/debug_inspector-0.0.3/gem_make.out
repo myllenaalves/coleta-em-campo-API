@@ -1,0 +1,15 @@
+current directory: /home/myllena/coleta-em-campo-API/vendor/bundle/ruby/2.7.0/gems/debug_inspector-0.0.3/ext/debug_inspector
+/home/myllena/.rvm/rubies/ruby-2.7.0/bin/ruby -I /home/myllena/.rvm/rubies/ruby-2.7.0/lib/ruby/2.7.0 -r ./siteconf20200722-12442-z1us0q.rb extconf.rb
+creating Makefile
+
+current directory: /home/myllena/coleta-em-campo-API/vendor/bundle/ruby/2.7.0/gems/debug_inspector-0.0.3/ext/debug_inspector
+make "DESTDIR=" clean
+
+current directory: /home/myllena/coleta-em-campo-API/vendor/bundle/ruby/2.7.0/gems/debug_inspector-0.0.3/ext/debug_inspector
+make "DESTDIR="
+compiling debug_inspector.c
+linking shared-object debug_inspector.so
+
+current directory: /home/myllena/coleta-em-campo-API/vendor/bundle/ruby/2.7.0/gems/debug_inspector-0.0.3/ext/debug_inspector
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 debug_inspector.so ./.gem.20200722-12442-oje21i

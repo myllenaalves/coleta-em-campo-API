@@ -1,14 +1,16 @@
-## About
+## Sobre
 - API para sistema de coleta em campo
 - Organização e estruturação dos dados coletados.
 - Saída em json para um servidor externo.
+- PostgreSQL, for DB
+- Deploy on Heroku
 
-## Installation
+## Instalação
 
-## Running the app
+## Aplicação em funcionamento
 
-### Setup
+- Para executar os testes:
+$ bundle exec rspec
 
-### Running the project 
-
-## Test
+- Para executar o servidor:
+$ bundle exec rails server
