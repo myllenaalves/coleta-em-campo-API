@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Authenticate", type: :request do
   describe "GET /authenticate" do
     it 'when authentication is not valid' do
-      post '/api/v1/authenticate'
+      post '/api/v1/authenticate', params:{email: 'blablabla@gmail.com', password: 'hhihiuhiuh198908'}
       expect(response).to have_http_status(:unauthorized)
     end
 

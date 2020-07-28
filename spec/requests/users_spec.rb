@@ -7,8 +7,8 @@ RSpec.describe "Users", type: :request do
 
   describe "users#index" do
     it "should request a list of users" do
-      allow(AuthorizeApiRequest).to receive_message_chain(:call, :result).and_return(@user)
-      get "/api/v1/user"
+      authentication = AuthenticateUser.call(@user.email, @user.password, @user.cpf)
+      get "/api/v1/user", headers: {"Authorization" => "Bearer #{authentication.result}"}
       expect(response).to be_successful
       expect(response.body).to include("Usuários carregados")
       expect(response).to have_http_status(200)
@@ -17,7 +17,7 @@ RSpec.describe "Users", type: :request do
     it "when the user isn't authenticated" do
       allow(AuthorizeApiRequest).to receive_message_chain(:call, :result).and_return(nil)
       get "/api/v1/user"
-      expect(response.body).to include("Not Authorized")
+      expect(response.body).to include("Usuário não autenticado")
       expect(response).to have_http_status(401)
     end
   end
@@ -30,7 +30,7 @@ RSpec.describe "Users", type: :request do
     end
 
     it 'when the user is not created' do
-      post '/api/v1/user'
+      post '/api/v1/user',  params: {:id => 5, :name => 'marcos', :email => 'marcos@hand.io', :password => 'bwy7867', :cpf => '06221220700' }
       expect(response).to have_http_status(422)
       expect(response.body).to include("Usuário não foi criado")
     end
@@ -38,16 +38,16 @@ RSpec.describe "Users", type: :request do
 
   describe "users#put" do
     it 'when the user is updated' do
-      allow(AuthorizeApiRequest).to receive_message_chain(:call, :result).and_return(@user)
-      put '/api/v1/user/2', params: {:name => 'marcos', :email => 'marcos@hand.io', :password => 'bwy7867', :cpf => '06221220700'}
+      authentication = AuthenticateUser.call(@user.email, @user.password, @user.cpf)
+      put '/api/v1/user/2', params: {:name => 'marcos', :email => 'marcos@hand.io', :password => 'bwy7867', :cpf => '06221220700'}, headers: {"Authorization" => "Bearer #{authentication.result}"}
       @user.reload
       expect(response).to have_http_status(200)
       expect(response.body).to include("Usuário foi editado")
     end
 
     it 'when the user is not found' do
-      allow(AuthorizeApiRequest).to receive_message_chain(:call, :result).and_return(@user)
-      put '/api/v1/user/3', params: {:name => 'marcos', :email => 'marcos@hand.io', :password => 'bwy7867', :cpf => '06221220700'}
+      authentication = AuthenticateUser.call(@user.email, @user.password, @user.cpf)
+      put '/api/v1/user/3', headers: {"Authorization" => "Bearer #{authentication.result}"}
       @user.reload
       expect(response).to have_http_status(422)
       expect(response.body).to include("Usuário não foi encontrado")
@@ -56,22 +56,22 @@ RSpec.describe "Users", type: :request do
     it "when the user isn't authenticated" do
       allow(AuthorizeApiRequest).to receive_message_chain(:call, :result).and_return(nil)
       put "/api/v1/user/2"
-      expect(response.body).to include("Not Authorized")
+      expect(response.body).to include("Usuário não autenticado")
       expect(response).to have_http_status(401)
     end
   end
 
   describe "users#delete" do
     it 'when the user is deleted' do
-      allow(AuthorizeApiRequest).to receive_message_chain(:call, :result).and_return(@user)
-      delete '/api/v1/user/2'
+      authentication = AuthenticateUser.call(@user.email, @user.password, @user.cpf)
+      delete '/api/v1/user/2', headers: {"Authorization" => "Bearer #{authentication.result}"}
       expect(response).to have_http_status(200)
       expect(response.body).to include("Usuário foi deletado")
     end
 
     it 'when the user is not found' do
-      allow(AuthorizeApiRequest).to receive_message_chain(:call, :result).and_return(@user)
-      delete '/api/v1/user/3'
+      authentication = AuthenticateUser.call(@user.email, @user.password, @user.cpf)
+      delete '/api/v1/user/3', headers: {"Authorization" => "Bearer #{authentication.result}"}
       expect(response).to have_http_status(422)
       expect(response.body).to include("Usuário não foi encontrado")
     end
@@ -79,7 +79,7 @@ RSpec.describe "Users", type: :request do
     it "when the user isn't authenticated" do
       allow(AuthorizeApiRequest).to receive_message_chain(:call, :result).and_return(nil)
       delete "/api/v1/user/2"
-      expect(response.body).to include("Not Authorized")
+      expect(response.body).to include("Usuário não autenticado")
       expect(response).to have_http_status(401)
     end
   end
