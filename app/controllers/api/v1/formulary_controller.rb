@@ -5,14 +5,14 @@ module Api
         param :name, String, :desc => "Nome do formulário", :required => true
       end
       # Listar todos os formulários
-      api :GET, "/v1/answer", "Lista todos os formulários (Necessário autenticação)"
+      api :GET, "/v1/formulary", "Lista todos os formulários (Necessário autenticação)"
       def index
         formularies = Formulary.order('created_at DESC');
         render json: {status: 'SUCCESS', message:'Formulários carregados', data:formularies},status: :ok
       end
 
       #Criar um novo formulário
-      api :POST, "/v1/answer", "Cria um formulário (Necessário autenticação)"
+      api :POST, "/v1/formulary", "Cria um formulário (Necessário autenticação)"
       param_group :formulary
       def create
 				formulary = Formulary.new(formulary_params)
@@ -24,8 +24,8 @@ module Api
 			end
 
       #Editar um formulário
-      api :PUT, "/v1/answer/:id", "Edita um formulário (Necessário autenticação)"
-      api :PATCH, "/v1/answer/:id", "Edita um formulário (Necessário autenticação)"
+      api :PUT, "/v1/formulary/:id", "Edita um formulário (Necessário autenticação)"
+      api :PATCH, "/v1/formulary/:id", "Edita um formulário (Necessário autenticação)"
       def update
         if Formulary.exists?(params[:id])
           formulary = Formulary.find(params[:id])
@@ -40,7 +40,7 @@ module Api
       end
 
       #Deletar um formulário
-      api :DELETE, "/v1/answer/:id", "Deleta um formulário (Necessário autenticação)"
+      api :DELETE, "/v1/formulary/:id", "Deleta um formulário (Necessário autenticação)"
       def destroy
         if Formulary.exists?(params[:id])
           formulary = Formulary.find(params[:id])

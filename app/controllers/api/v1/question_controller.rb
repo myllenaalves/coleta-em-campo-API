@@ -11,7 +11,7 @@ module Api
       api :GET, "/v1/question", "Lista todas as perguntas (Necessário autenticação)"
       def index
         questions = Question.all
-        render json: questions, status: :ok
+        render json: {status: 'SUCCESS', message:'Perguntas carregadas', data:questions},status: :ok
       end
 
       #Criar uma nova pergunta
@@ -19,7 +19,7 @@ module Api
       param_group :question
       def create
         question = Question.create!(question_params)
-        render json: question, status: :created
+        render json: {status: 'SUCCESS', message:'Pergunta foi criada', data:question},status: :created
 			end
 
       #Editar uma pergunta

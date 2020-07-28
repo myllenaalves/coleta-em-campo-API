@@ -3,10 +3,10 @@ module Api
     class VisitController < ApplicationController
       def_param_group :visit do
         param :user_id, String, :desc => "Id do usuário que a visita pertence", :required => true
-        param :date, DateTime, :desc => "Email para a autenticação", :required => true
+        param :date, String, :desc => "Data da visita", :required => true
         param :status, String, :desc => "Pode ser realizando, pendente ou realizada", :required => true
-        param :ckeckin_at, DateTime, :desc => "Horário de chegada da visita"
-        param :ckeckin_out, DateTime, :desc => "Horário de saída da visita"
+        param :checkin_at, String, :desc => "Horário de chegada da visita"
+        param :checkout_at, String, :desc => "Horário de saída da visita"
       end
       # Listar todas as visitas
       api :GET, "/v1/visit", "Lista todas as visitas (Necessário autenticação)"

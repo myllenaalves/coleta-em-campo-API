@@ -60,7 +60,7 @@ module Api
       # Parametros aceitos
 			private
 			def user_params
-				params.permit(:email, :password, :cpf)
+				params.permit(:name, :email, :password, :cpf)
 			end
     end
   end
